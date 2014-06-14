@@ -3,7 +3,7 @@ $home = "/home/vagrant"
 $executes_as_vagrant = "sudo -u vagrant -H bash -l -c"
 
 # only mongodb is supported
-#$database = "mongodb"
+$database = "mongodb"
 
 # Set default binary paths
 Exec {
@@ -38,4 +38,18 @@ package { "build-essential":
 
 package { "curl":
 	ensure => "present"
+}
+
+#Install database
+case $database {
+	"mongodb" : {
+		class { "::mongodb::server":
+			auth => true,
+		}
+		mongodb::db { "app":
+			user => "root",
+			password => "root",
+			require => Class[ "::mongodb::server" ],
+		}
+	}
 }
