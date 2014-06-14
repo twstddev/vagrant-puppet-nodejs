@@ -53,3 +53,25 @@ case $database {
 		}
 	}
 }
+
+# Install nodejs and additional packages
+class { "nodejs":
+	version => "stable",
+}
+
+package { "express":
+	provider => "npm",
+}
+
+package { "sails":
+	provider => "npm",
+}
+
+package { "mocha":
+	provider => "npm",
+}
+
+Class[ "nodejs" ] ->
+	Package[ "express" ] ->
+	Package[ "sails" ] ->
+	Package[ "mocha" ]
