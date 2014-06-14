@@ -71,6 +71,10 @@ package { "mocha":
 	provider => "npm",
 }
 
+package { "express-generator":
+	provider => "npm",
+}
+
 Class[ "nodejs" ] ->
 	Package[ "express" ] ->
 	Package[ "sails" ] ->
