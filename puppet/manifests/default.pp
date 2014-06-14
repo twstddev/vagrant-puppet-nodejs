@@ -22,3 +22,20 @@ class { "update_apt":
 }
 
 Stage[ "init" ] -> Stage[ "main" ]
+
+# Main packages
+package { "vim":
+	ensure => "present",
+}
+
+package { "git":
+	ensure => "present",
+}
+
+package { "build-essential":
+	ensure => "present",
+}
+
+package { "curl":
+	ensure => "present"
+}
